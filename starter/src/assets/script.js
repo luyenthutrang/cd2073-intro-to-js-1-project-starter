@@ -52,7 +52,7 @@ let cart = []
   - if the product is not already in the cart, add it to the cart
 */
 function getByProductId(arr, value) {
-  for (var i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length; i++) {
     if (arr[i].productId == value) return arr[i];
   };
 };
@@ -116,7 +116,7 @@ function removeProductFromCart(productId) {
 function cartTotal() {
   let numProdsInCart = cart.length;
   let totalCost = 0;
-  for (var i = 0; i < numProdsInCart; i++) {
+  for (let i = 0; i < numProdsInCart; i++) {
     totalCost += cart[i].price * cart[i].quantity;
   }
   
