@@ -51,15 +51,15 @@ let cart = []
   - addProductToCart should then increase the product's quantity
   - if the product is not already in the cart, add it to the cart
 */
-function getByProductId(arr, value) {
+function getIdxByProductId(arr, value) {
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i].productId == value) return arr[i];
+    if (arr[i].productId == value) return i;
   };
 };
 
 function addProductToCart(productId) {
   let numProducts = products.length;
-  let chooseProduct = getByProductId(products, productId);
+  let chooseProduct = products[getIdxByProductId(products, productId)];
 
   if(cart.includes(chooseProduct)) {
     // increase product quantity if in cart
@@ -76,7 +76,7 @@ function addProductToCart(productId) {
 */
 function increaseQuantity(productId) {
   let numProdsInCart = cart.length;
-  let chooseProdInCart = getByProductId(cart, productId);
+  let chooseProdInCart = cart[getIdxByProductId(cart, productId)];
   chooseProdInCart.quantity += 1;
 };
 
@@ -87,11 +87,12 @@ function increaseQuantity(productId) {
 */
 function decreaseQuantity(productId) {
   let numProdsInCart = cart.length;
-  let chooseProdInCart = getByProductId(cart, productId);
+  let idx = getIdxByProductId(cart, productId);
+  let chooseProdInCart = cart[idx];
   chooseProdInCart.quantity -= 1;
 
   if (chooseProdInCart.quantity == 0) {
-    cart.pop(chooseProdInCart);
+    cart.splice(idx, 1);
   };
 };
 
@@ -102,10 +103,11 @@ function decreaseQuantity(productId) {
 */
 function removeProductFromCart(productId) {
   let numProdsInCart = cart.length;
-  let chooseProdInCart = getByProductId(cart, productId);
+  let idx = getIdxByProductId(cart, productId);
+  let chooseProdInCart = cart[idx];
   
   chooseProdInCart.quantity = 0;
-  cart.pop(chooseProdInCart);
+  cart.splice(idx, 1);
 };
 
 /* Create a function named cartTotal that has no parameters
